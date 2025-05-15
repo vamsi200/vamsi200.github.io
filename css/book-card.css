@@ -1,0 +1,45 @@
+.book-card {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.book-card-image {
+  max-width: 150px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.book-card-content {
+  margin-left: 20px;
+  flex-grow: 1;
+}
+
+.book-card-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.book-card-category {
+  font-size: 1.1em;
+  color: #007BFF;
+  margin-bottom: 10px;
+}
+
+.book-card-description {
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.book-card-status {
+  font-size: 1em;
+  font-weight: bold;
+  color: #333;
+}
+
