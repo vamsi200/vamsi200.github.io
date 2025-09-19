@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Vamsi200 Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Feb 2025 23:50:05 +0530</lastBuildDate>
+    <lastBuildDate>Thu, 21 Aug 2025 20:14:58 +0530</lastBuildDate>
     <atom:link href="https://vamsi200.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Explaining FKeylogger: The Rationale Behind Linux Keylogger Detection</title>
+      <link>https://vamsi200.github.io/posts/explaining_fkeylogger_the_rationale_behind_linux_keylogger_detection/</link>
+      <pubDate>Thu, 21 Aug 2025 20:14:58 +0530</pubDate>
+      <guid>https://vamsi200.github.io/posts/explaining_fkeylogger_the_rationale_behind_linux_keylogger_detection/</guid>
+      <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;p&gt;Keyloggers on Linux are pretty rare - I guess, but they still exist. Are they easy to detect? Well… maybe, maybe not. It really depends on the adversary and how much effort this guy put to hide it. Anyway, I built this project because at some point I decided, &amp;ldquo;Let’s build a tool to detect them&amp;rdquo; - and here we are - &lt;a href=&#34;https://github.com/vamsi200/FKeyLogger&#34;  target=&#34;_blank&#34; rel=&#34;noreferrer nofollow&#34;&gt;Github link&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Disclaimer:&#xA;Before we start please do understand that this project is just an exploration and built out of curiosity.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Skills Assessment 1&amp;2 Login Brute Forcing</title>
       <link>https://vamsi200.github.io/posts/skills-assessment1and2-login-brute-forcing/</link>

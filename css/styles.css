@@ -49,31 +49,3 @@
   margin-bottom: 10px;
   line-height: 1.4;
 }
-
-.book-card-status {
-  font-size: 1.1em;
-  font-weight: bold;
-}
-
-.book-card-status span {
-  font-weight: normal;
-  padding: 5px 10px;
-  border-radius: 20px;
-  text-transform: capitalize;
-}
-
-.status-in-progress {
-  background-color: #ffc107;
-  color: #fff;
-}
-
-.status-read {
-  background-color: #28a745;
-  color: #fff;
-}
-
-.status-not-started {
-  background-color: #dc3545;
-  color: #fff;
-}
-

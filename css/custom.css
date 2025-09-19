@@ -1,0 +1,11 @@
+@import url(https://db.onlinewebfonts.com/c/84d8d4c49f66a6a5abe1e0608ba764a2?family=Source+Sans+Pro);
+ @import url(https://db.onlinewebfonts.com/c/e6398e21c3693e91fd5e4aabd6d28797?family=Fira+Code);
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Source Sans Pro', system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 500;
+}
+code, pre {
+  font-family: 'Fira Code';
+  font-weight: 10;
+}
+
