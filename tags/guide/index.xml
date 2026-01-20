@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Guide on Vamsi200 Blog</title>
-    <link>https://vamsi200.github.io/tags/guide/</link>
+    <link>http://localhost:1313/tags/guide/</link>
     <description>Recent content in Guide on Vamsi200 Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 28 Jan 2025 14:50:56 +0530</lastBuildDate>
-    <atom:link href="https://vamsi200.github.io/tags/guide/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/guide/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Encrypting Partitions with LUKS using cryptsetup: A Guide</title>
-      <link>https://vamsi200.github.io/posts/using_cryptsetup_to_encrypt_partitions/</link>
+      <link>http://localhost:1313/posts/using_cryptsetup_to_encrypt_partitions/</link>
       <pubDate>Tue, 28 Jan 2025 14:50:56 +0530</pubDate>
-      <guid>https://vamsi200.github.io/posts/using_cryptsetup_to_encrypt_partitions/</guid>
+      <guid>http://localhost:1313/posts/using_cryptsetup_to_encrypt_partitions/</guid>
       <description>&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Administrative (sudo) privileges&lt;/li&gt;&#xA;&lt;li&gt;A backup of any existing data on the target partition&lt;/li&gt;&#xA;&lt;li&gt;The partition you want to encrypt (in this guide, we&amp;rsquo;ll use &lt;code&gt;/dev/sdb2&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;installing-cryptsetup&#34;&gt;Installing cryptsetup&lt;/h2&gt;&#xA;&lt;p&gt;Choose the appropriate command for your distribution:&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;For Debian/Ubuntu:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt-get install cryptsetup&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;For distributions using pacman:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo pacman -Sy cryptsetup&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;encryption-process&#34;&gt;Encryption Process&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-initialize-luks-encryption&#34;&gt;1. Initialize LUKS Encryption&lt;/h3&gt;&#xA;&lt;p&gt;⚠️ &lt;strong&gt;WARNING&lt;/strong&gt;: Before we proceed, please make sure you have a BACKUP OF THE DATA somewhere.&lt;/p&gt;</description>
     </item>
   </channel>
