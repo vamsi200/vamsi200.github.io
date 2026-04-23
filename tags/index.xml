@@ -6,8 +6,29 @@
     <description>Recent content in Tags on Vamsi200 Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 Aug 2025 20:14:58 +0530</lastBuildDate>
+    <lastBuildDate>Sat, 21 Mar 2026 20:14:58 +0530</lastBuildDate>
     <atom:link href="https://vamsi200.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Guide</title>
+      <link>https://vamsi200.github.io/tags/guide/</link>
+      <pubDate>Sat, 21 Mar 2026 20:14:58 +0530</pubDate>
+      <guid>https://vamsi200.github.io/tags/guide/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux</title>
+      <link>https://vamsi200.github.io/tags/linux/</link>
+      <pubDate>Sat, 21 Mar 2026 20:14:58 +0530</pubDate>
+      <guid>https://vamsi200.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PerfAnalysis</title>
+      <link>https://vamsi200.github.io/tags/perfanalysis/</link>
+      <pubDate>Sat, 21 Mar 2026 20:14:58 +0530</pubDate>
+      <guid>https://vamsi200.github.io/tags/perfanalysis/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Cybersec</title>
       <link>https://vamsi200.github.io/tags/cybersec/</link>
@@ -20,13 +41,6 @@
       <link>https://vamsi200.github.io/tags/htb/</link>
       <pubDate>Mon, 24 Feb 2025 23:56:47 +0530</pubDate>
       <guid>https://vamsi200.github.io/tags/htb/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Guide</title>
-      <link>https://vamsi200.github.io/tags/guide/</link>
-      <pubDate>Tue, 28 Jan 2025 14:50:56 +0530</pubDate>
-      <guid>https://vamsi200.github.io/tags/guide/</guid>
       <description></description>
     </item>
   </channel>

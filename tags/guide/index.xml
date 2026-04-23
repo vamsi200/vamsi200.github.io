@@ -6,8 +6,15 @@
     <description>Recent content in Guide on Vamsi200 Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Jan 2025 14:50:56 +0530</lastBuildDate>
+    <lastBuildDate>Sat, 21 Mar 2026 20:14:58 +0530</lastBuildDate>
     <atom:link href="https://vamsi200.github.io/tags/guide/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux Perf Analysis - Quickly Check Your Systems Health</title>
+      <link>https://vamsi200.github.io/posts/linuxperfanalysis_quickly_check_your_systems_health/</link>
+      <pubDate>Sat, 21 Mar 2026 20:14:58 +0530</pubDate>
+      <guid>https://vamsi200.github.io/posts/linuxperfanalysis_quickly_check_your_systems_health/</guid>
+      <description>&lt;div style=&#34;text-align: center; margin: 20px 0;&#34;&gt;&#xA;  &lt;img src=&#34;https://vamsi200.github.io/images/perf.png&#34; alt=&#34;Image&#34; &#xA;       style=&#34;border: 0px solid grey; border-radius: 6px; &#xA;              max-width: 100%; height: auto; &#xA;              width: 1000px;&#34;&gt;&#xA;  &#xA;&lt;/div&gt;&#xA;&#xA;&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve been using linux for a while(almost ten years), In the early days, I used to have this very cheap and slow puter. I always used to wonder why the hell it is so slow all of a sudden, since I was new to linux and have been a windows user previously I had no idea how to even open terminal and check what&amp;rsquo;s wrong. Eventually I ofcourse learned through tutorials and all&amp;hellip; Uhmm, well that&amp;rsquo;s the intro man, I have nothing to say anymore. Let&amp;rsquo;s just go straight into schize.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Encrypting Partitions with LUKS using cryptsetup: A Guide</title>
       <link>https://vamsi200.github.io/posts/using_cryptsetup_to_encrypt_partitions/</link>
